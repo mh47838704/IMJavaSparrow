@@ -1,0 +1,77 @@
+package RM.File;
+import "RM.BaseDefine.proto";
+option java_package = "base.protobuf.file";
+//option java_outer_classname = "MOBILEMedical";
+option optimize_for = LITE_RUNTIME;
+
+// 文件列表请求
+message IMFileListReq{
+	//cmd id:	0x0501
+	required uint32 user_id = 1;
+}
+
+// 文件列表返回
+message IMFileListRsp{
+	//cmd id:	0x0502
+	required uint32 result_code = 1;		//0:successed    1:failed
+	repeated RM.BaseDefine.HeartFileInfo file_list = 2; //所有文件列表信息
+}
+
+// 文件删除请求
+message IMFileDeleteReq{
+	//cmd id:	0x0503
+	required uint32 user_id = 1;
+	required uint32 file_id = 2;
+}
+
+// 文件删除返回
+message IMFileDeleteRsp{
+	//cmd id:	0x0504
+	required uint32 user_id = 1;
+	required uint32 result_code = 2;
+}
+
+
+// 文件上传请求
+message IMFileUploadReq{
+	//cmd id:	0x0505
+	required uint32 user_id = 1;
+	required RM.BaseDefine.FileInfo file_info = 2;
+	required bytes file_data = 3;
+}
+
+// 文件上传返回
+message IMFileUploadRsp{
+	//cmd id:	0x0506
+	required uint32 user_id = 1;
+	required uint32 result_code = 2;
+}
+
+// 文件元信息保存请求
+message IMFileMetaDataSaveReq{
+	//cmd id:	0x0507
+	required uint32 user_id = 1;
+	required string store_url = 2; //文件存储的路径
+	required RM.BaseDefine.FileInfo file_info = 3;
+}
+
+// 文件元信息保存返回
+message IMFileMetaDataSaveRsp{
+	//cmd id:	0x0508
+	required uint32 user_id = 1;
+	required uint32 result_code = 2;
+}
+
+// 文件下载请求
+message IMFileDownloadReq{
+	//cmd id:	0x0509
+	required uint32 user_id = 1;
+	required string store_url = 2; //文件存储的路径
+}
+
+// 文件下载返回
+message IMFileDownloadRsp{
+	//cmd id:	0x0510
+	required uint32 user_id = 1;
+	required bytes file_data = 2;
+}

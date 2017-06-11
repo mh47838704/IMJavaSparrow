@@ -1,0 +1,89 @@
+package RM.BaseDefine;
+option java_package = "base.protobuf.basedefine";
+//option java_outer_classname = "MOBILEMedical";
+option optimize_for = LITE_RUNTIME;
+
+// 定义了登录返回错误码
+enum ResultType{
+	REFUSE_REASON_NONE				= 0;
+	REFUSE_REASON_NO_MSG_SERVER		= 1;
+	REFUSE_REASON_MSG_SERVER_FULL 	= 2;
+	REFUSE_REASON_NO_DB_SERVER		= 3;
+	REFUSE_REASON_NO_LOGIN_SERVER	= 4;
+	REFUSE_REASON_NO_ROUTE_SERVER	= 5;
+	REFUSE_REASON_DB_VALIDATE_FAILED = 6;
+	REFUSE_REASON_VERSION_TOO_OLD	= 7;
+}
+
+// 用户状态
+enum UserStatType{
+	USER_STATUS_ONLINE 	= 1;
+	USER_STATUS_OFFLINE	= 2;
+	USER_STATUS_LEAVE	= 3;
+}
+
+// 客户端类型
+enum ClientType{
+	CLIENT_TYPE_WINDOWS     = 0x01;
+    CLIENT_TYPE_MAC         = 0x02;
+    CLIENT_TYPE_IOS         = 0x11;
+    CLIENT_TYPE_ANDROID     = 0x12;
+}
+
+// 用户详细信息
+message UserInfo{
+	required uint32 user_id = 1;
+	required uint32 user_gender = 2; 	//// 用户性别,男：1 女：2 人妖/外星人：0
+	required uint32 user_age = 3;
+	required string avatar_url = 4;
+	required string email = 5;
+	required string user_real_name = 6;	//真名
+	required string user_tel = 7;
+	required string user_domain = 8;	//用户名拼音
+    optional string sign_info = 9;
+}
+
+// 消息类型
+enum MsgType{
+	MSG_TYPE_SINGLE_TEXT    = 0x01;
+    MSG_TYPE_SINGLE_AUDIO   = 0x02;
+    MSG_TYPE_GROUP_TEXT     = 0x11;
+    MSG_TYPE_GROUP_AUDIO    = 0x12;
+}
+
+// 会话类型
+enum SessionType{
+	SESSION_TYPE_SINGLE = 1;          	//单个用户会话
+	SESSION_TYPE_GROUP = 2;          	//群会话
+}
+
+// 文件传输相关命令
+enum FileCmdID{
+    CID_FILE_LIST_REQ              = 0x0501; // sender/receiver need to login to
+    CID_FILE_LIST_RES              = 0x0502; // login success or failure
+    CID_FILE_DELETE_REQ                  = 0x0503;
+    CID_FILE_DELETE_RSP          = 0x0504;
+}
+
+// 文件操作状态
+enum FileOperateState{
+    CID_FILE_NOT_EXIST = 0x01;
+    CID_FILE_OPER_OK = 0x02;
+}
+
+// 文件详细信息
+message FileInfo{
+	required uint32 data_len= 1; // 文件保存的心电数据的时长
+	required string name = 2; //文件名
+	required string create_time = 3; //创建时间
+}
+
+// 文件详细信息
+message HeartFileInfo{
+	required uint32 user_id = 1; //用户ID(同时也是测试者)
+	required uint32 file_id = 2; //文件的ID
+	required uint32 assess_result = 3; //评价结果个数
+	required string store_url = 4; //文件存储的路径
+	required FileInfo file_info = 5;
+}
+

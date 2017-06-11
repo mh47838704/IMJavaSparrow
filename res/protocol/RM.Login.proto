@@ -1,0 +1,51 @@
+package RM.Login;
+import "RM.BaseDefine.proto";
+option java_package = "base.protobuf.login";
+//option java_outer_classname = "MOBILEMedical";
+option optimize_for = LITE_RUNTIME;
+
+//service id:	0x0001
+
+// msg_server地址请求(已经废弃，改用http请求)
+message IMMsgServReq{
+	//cmd id:		0x0101
+}
+// msg_server地址应答(已经废弃)
+message IMMsgServRsp{
+	//cmd id:		0x0102
+	required RM.BaseDefine.ResultType result_code = 1;
+	optional string prior_ip = 2;
+	optional string backip_ip = 3;
+	optional uint32 port = 4;
+}
+
+// 登录请求
+message IMLoginReq{
+	//cmd id:		0x0103
+	required string user_name = 1;
+	required string password = 2;
+	required RM.BaseDefine.UserStatType online_status = 3;
+	required RM.BaseDefine.ClientType client_type = 4;
+	optional string client_version = 5;
+}
+
+// 登录返回
+message IMLoginRes{
+	//cmd id:		0x0104
+	required uint32 server_time = 1;
+	required RM.BaseDefine.ResultType result_code = 2;
+	optional string result_string = 3;
+	optional RM.BaseDefine.UserStatType online_status = 4;
+	optional RM.BaseDefine.UserInfo user_info = 5;
+}
+
+// 登出请求
+message IMLogoutReq{
+	//cmd id:		0x0105
+}
+
+// 登出返回
+message IMLogoutRsp{
+	//cmd id:		0x0106
+	required uint32 result_code = 1;
+}

@@ -1,0 +1,37 @@
+package RM.Message;
+import "RM.BaseDefine.proto";
+option java_package = "base.protobuf.message";
+//option java_outer_classname = "MOBILEMedical";
+option optimize_for = LITE_RUNTIME;
+
+//service id  0x0003
+
+// 发送消息协议。
+message IMMsgData{
+	//cmd id:		0x0301
+	required uint32 from_user_id = 1;				//消息发送方
+	required uint32 to_session_id = 2;				//消息接受方
+	required uint32 msg_id = 3;
+	required uint32 create_time = 4;
+	required RM.BaseDefine.MsgType msg_type = 5;
+	required bytes msg_data = 6;
+	optional bytes attach_data = 20;
+}
+
+// 消息收到回复。
+message IMMsgDataAck{
+	//cmd id:		0x0302
+	required uint32 user_id = 1;			//发送此信令的用户id
+	required uint32 session_id = 2;
+	required uint32 msg_id = 3;
+	required RM.BaseDefine.SessionType session_type = 4;
+}
+
+// 消息已读回复。
+message IMMsgDataReadAck{
+	//cmd id:		0x0303
+	required uint32 user_id = 1;			//发送此信令的用户id
+	required uint32 session_id = 2;			
+	required uint32 msg_id = 3;
+	required RM.BaseDefine.SessionType session_type = 4;
+}
